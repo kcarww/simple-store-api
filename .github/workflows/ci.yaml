@@ -11,4 +11,6 @@ jobs:
       -run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - run:
+          python src.core._shared.tests.domain.test_notification.py
         
