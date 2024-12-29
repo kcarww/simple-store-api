@@ -1,4 +1,4 @@
-from src.core._shared.domain.notification import Notification
+from core._shared.domain.notification import Notification
 class TestNotification:
     def test_append_notification(self):
         notification = Notification()
