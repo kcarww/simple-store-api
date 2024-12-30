@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from core.product.domain.product import Product
+from django_project.product.models import Product
+
 
 class ProductAdmin(admin.ModelAdmin):
     pass
