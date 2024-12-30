@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from datetime import datetime
 from core._shared.domain.entity import Entity
+from typing import Optional
 
 @dataclass(kw_only=True)
 class Product(Entity):
     name: str
     price: float
-    description: str
+    description: Optional[str]
     stock: int
     active: bool = True
     created_at: datetime = field(default_factory=datetime.now)
