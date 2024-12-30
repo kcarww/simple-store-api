@@ -23,15 +23,18 @@ class DjangoORMProductRepository(ProductRepositoryInterface):
     def find(self, id):
         pass
 
-    def find_all(self):
-        pass
+    def find_all(self) -> list[Product]:
+        return [
+            ProductModelMapper.to_entity(product)
+            for product in self.product_model.objects.all()
+        ]
 
 @dataclass
 class ProductModelMapper:
     @staticmethod
     def to_entity(product: ProductModel) -> Product:
         return Product(
-            id=UUID(product.id),
+            id=product.id,
             name=product.name,
             price=product.price,
             stock=product.stock,

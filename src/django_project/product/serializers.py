@@ -16,3 +16,13 @@ class CreateProductRequestSerializer(serializers.Serializer):
     stock = serializers.IntegerField()
     active = serializers.BooleanField()
     price = serializers.DecimalField(max_digits=10, decimal_places=2)
+
+
+class ListOutputMetaSerializer(serializers.Serializer):
+    current_page = serializers.IntegerField()
+    per_page = serializers.IntegerField()
+    total = serializers.IntegerField()
+
+class ListProductResponseSerializer(serializers.Serializer):
+    meta = ListOutputMetaSerializer()
+    data = CreateProductResponseSerializer(many=True)
