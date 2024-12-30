@@ -10,7 +10,8 @@ class TestCreateProductUseCaseIntegration:
             name="Product 1",
             description="Description of Product 1",
             price=100.0,
-            stock=10
+            stock=10,
+            active=True
         )
         use_case = CreateProductUseCase(repository)
         output = use_case.execute(input)

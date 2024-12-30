@@ -7,6 +7,7 @@ class CreateProductInput:
     name: str
     description: Optional[str]
     price: float
+    active: bool
     stock: int
 
 @dataclass(kw_only=True)
