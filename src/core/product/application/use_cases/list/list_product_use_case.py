@@ -18,6 +18,7 @@ class ListProductUseCase:
                     price=product.price,
                     stock=product.stock,
                     active=product.active,
+                    description=product.description,
                     created_at=product.created_at,
                     updated_at=product.updated_at,
                 ) for product in products

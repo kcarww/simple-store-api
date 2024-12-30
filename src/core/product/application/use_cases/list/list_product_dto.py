@@ -20,6 +20,7 @@ class ListProductOutput:
     price: float
     stock: int
     active: bool
+    description: str
     created_at: str
     updated_at: str
 

@@ -63,3 +63,5 @@ class TestFindAll:
         assert product2.price == 20.0
         assert product2.description == "Description of product 2"
         assert product2.stock == 5
+
+
