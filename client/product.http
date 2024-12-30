@@ -1,2 +1,11 @@
 # @name post_product
-POST 
+POST http://127.0.0.1:8000/api/products/
+Content-Type: application/json
+
+{
+    "name": "Product 1",
+    "price": 100,
+    "stock": 10,
+    "description": "Description of product 1",
+    "active": true
+}
