@@ -19,6 +19,7 @@ class Product(Entity):
     def validade(self):
         self.validate_name()
         self.validate_price()
+        self.validate_description()
 
         if self.notification.has_errors:
             raise TypeError(self.notification.errors)
