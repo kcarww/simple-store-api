@@ -3,9 +3,14 @@ POST http://127.0.0.1:8000/api/products/
 Content-Type: application/json
 
 {
-    "name": "Product 1",
+    "name": "Product 8",
     "price": 100,
     "stock": 10,
     "description": "Description of product 1",
-    "active": true
+    "active": false
 }
+
+###
+
+# @name get_products
+GET http://127.0.0.1:8000/api/products?order_by=name&current_page=2
