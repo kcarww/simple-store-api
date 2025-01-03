@@ -1,7 +1,9 @@
 name: ci-simple-store-workflow
 
 on:
-  push:
+  pull_request:
+    branches:
+      - develop
 
 jobs:
   check-application:
