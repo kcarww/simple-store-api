@@ -50,4 +50,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: kcarww/simple-store-api:latest
+          tags: kcarw/simple-store-api:latest
