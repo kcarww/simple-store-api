@@ -4,13 +4,15 @@ on:
   pull_request:
     branches:
       - develop
-strategy:
-  matrix:
-    python-version: ["3.12", "3.11"]
+
 
 jobs:
   check-application:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12", "3.11"]
+        
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
