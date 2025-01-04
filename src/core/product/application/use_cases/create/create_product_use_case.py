@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
-from core.product.application.use_cases.create.create_product_dto import CreateProductInput, CreateProductOutput
-from core.product.application.use_cases.exceptions.exceptions import InvalidProductData
-from core.product.domain.product import Product
-from core.product.domain.product_repository import ProductRepositoryInterface
+from src.core.product.application.use_cases.create.create_product_dto import CreateProductInput, CreateProductOutput
+from src.core.product.application.use_cases.exceptions.exceptions import InvalidProductData
+from src.core.product.domain.product import Product
+from src.core.product.domain.product_repository import ProductRepositoryInterface
 
 @dataclass
 class CreateProductUseCase:

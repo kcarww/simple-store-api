@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from datetime import datetime
-from core._shared.domain.entity import Entity
+from src.core._shared.domain.entity import Entity
 from typing import Optional
 
 @dataclass(kw_only=True)
