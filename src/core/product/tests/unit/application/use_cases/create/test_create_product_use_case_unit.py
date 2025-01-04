@@ -21,7 +21,8 @@ class TestCreateProductUseCase:
             name="Test Product",
             price=100.0,
             stock=50,
-            description="A test product"
+            description="A test product",
+            active=False
         )
         mock_repository.create.return_value = None  
 
@@ -48,7 +49,8 @@ class TestCreateProductUseCase:
             name="",  
             price=-100.0,  
             stock=50,
-            description="A test product"
+            description="A test product",
+            active=True
         )
 
 
