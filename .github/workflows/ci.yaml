@@ -12,6 +12,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.12", "3.11"]
+    env:
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
         
     steps:
       - name: Checkout code
@@ -20,7 +22,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ matrix.python-version }}        
 
       - name: Install dependencies
         run: |
