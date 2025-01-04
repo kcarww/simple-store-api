@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 
-from core.product.domain.product import Product
-from core.product.domain.product_repository import ProductRepositoryInterface
+from src.core.product.domain.product import Product
+from src.core.product.domain.product_repository import ProductRepositoryInterface
 
 @dataclass(kw_only=True)
 class InMemoryProductRepository(ProductRepositoryInterface):

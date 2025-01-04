@@ -1,5 +1,5 @@
-from core.product.domain.product import Product
-from core.product.infra.in_memory.in_memory_product_repository import InMemoryProductRepository
+from src.core.product.domain.product import Product
+from src.core.product.infra.in_memory.in_memory_product_repository import InMemoryProductRepository
 
 
 class TestInMemoryProductRepository:

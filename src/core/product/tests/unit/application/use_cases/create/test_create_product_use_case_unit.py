@@ -2,9 +2,9 @@ import pytest
 from unittest.mock import Mock
 from datetime import datetime
 
-from core.product.application.use_cases.create.create_product_dto import CreateProductInput
-from core.product.application.use_cases.create.create_product_use_case import CreateProductUseCase
-from core.product.application.use_cases.exceptions.exceptions import InvalidProductData
+from src.core.product.application.use_cases.create.create_product_dto import CreateProductInput
+from src.core.product.application.use_cases.create.create_product_use_case import CreateProductUseCase
+from src.core.product.application.use_cases.exceptions.exceptions import InvalidProductData
 
 
 class TestCreateProductUseCase:
