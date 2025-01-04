@@ -1,5 +1,4 @@
 from abc import ABC
-from ast import TypeVar
 from dataclasses import dataclass, field
 from typing import Generic, TypeVar
 from uuid import UUID
