@@ -33,7 +33,7 @@ jobs:
         run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)/src" >> $GITHUB_ENV
 
       - name: Run tests
-        run: pytest
+        run: pytest --cov=src --cov-report=xml
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
