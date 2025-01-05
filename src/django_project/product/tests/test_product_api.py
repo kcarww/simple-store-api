@@ -1,3 +1,4 @@
+from uuid import uuid4
 import pytest
 from rest_framework.test import APITestCase, APIClient
 from rest_framework import status
@@ -125,3 +126,41 @@ class TestGetProductAPI:
         assert product2["stock"] == 5
         # assert product2["active"] is False
         assert product2["price"] == "20.00"
+
+
+@pytest.mark.django_db
+class TestRetrieveProductAPI:
+    def test_when_product_exists_then_return_200_with_product_data(self):
+        repository = DjangoORMProductRepository()
+
+        product = Product(
+            name="Product 1",
+            description="Description of product 1",
+            stock=10,
+            active=True,
+            price=10.0
+        )
+        repository.create(product)
+
+        url = f"/api/products/{product.id}/"
+
+        response = APIClient().get(url)
+
+        assert response.status_code == status.HTTP_200_OK
+
+        response_data = response.json()['data']
+        assert response_data["id"] == str(product.id)
+        assert response_data["name"] == "Product 1"
+        assert response_data["description"] == "Description of product 1"
+        assert response_data["stock"] == 10
+        assert response_data["active"] is True
+        assert response_data["price"] == "10.00"
+        assert "created_at" in response_data
+        assert "updated_at" in response_data
+
+    def test_when_product_does_not_exist_then_return_404(self):
+        url = f"/api/products/{uuid4()}/"
+
+        response = APIClient().get(url)
+
+        assert response.status_code == status.HTTP_404_NOT_FOUND
