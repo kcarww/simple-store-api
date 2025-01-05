@@ -78,6 +78,7 @@ class TestProduct:
         assert product.active
         assert product.created_at
         assert product.updated_at
+        assert isinstance(product.id, uuid.UUID)
 
     def test_update_product(self):
         product = Product(

@@ -10,7 +10,7 @@ class GetProductInput:
 
 @dataclass
 class GetProductOutput:
-    id: str
+    id: UUID
     name: str
     price: float
     stock: int

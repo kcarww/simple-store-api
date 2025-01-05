@@ -20,8 +20,12 @@ class DjangoORMProductRepository(ProductRepositoryInterface):
     def delete(self, entity):
         pass
 
-    def find(self, id):
-        pass
+    def find(self, id: str) -> Product | None:
+        try:
+            product_orm = self.product_model.objects.get(id=id)
+            return product_orm 
+        except self.product_model.DoesNotExist:
+            None
 
     def find_all(self) -> list[Product]:
         return [

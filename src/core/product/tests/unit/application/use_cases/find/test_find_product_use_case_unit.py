@@ -19,7 +19,7 @@ class TestFindProductUseCase:
         return FindProductUseCase(product_repository=mock_repository)
 
     def test_execute_returns_product(self, use_case, mock_repository):
-        product_id = str(uuid4())
+        product_id = uuid4()
         mock_product = Product(
             id=product_id,
             name="Product A",
@@ -46,7 +46,7 @@ class TestFindProductUseCase:
         assert response.updated_at == datetime(2024, 1, 1, 12, 0, 0)
 
     def test_execute_raises_product_not_found(self, use_case, mock_repository):
-        product_id = str(uuid4())
+        product_id = uuid4()
         mock_repository.find.return_value = None
         request = GetProductInput(id=product_id)
 
