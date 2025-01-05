@@ -13,4 +13,10 @@ Content-Type: application/json
 ###
 
 # @name get_products
-GET http://127.0.0.1:8000/api/products?order_by=name&current_page=2
+GET http://127.0.0.1:8000/api/products/
+
+
+###
+
+# @name get_product
+GET http://127.0.0.1:8000/api/products/512bb66a-51c2-4487-9b49-a3dd19ee8341/
