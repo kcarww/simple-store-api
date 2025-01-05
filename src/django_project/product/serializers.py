@@ -26,3 +26,9 @@ class ListOutputMetaSerializer(serializers.Serializer):
 class ListProductResponseSerializer(serializers.Serializer):
     meta = ListOutputMetaSerializer()
     data = CreateProductResponseSerializer(many=True)
+
+class RetrieveProductResponseSerializer(serializers.Serializer):
+    data = CreateProductResponseSerializer(source='*')
+
+class RetrieveProductRequestSerializer(serializers.Serializer):
+    id = serializers.UUIDField()
