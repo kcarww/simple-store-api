@@ -4,13 +4,13 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import status
 
-from core.product.application.use_cases.create.create_product_dto import CreateProductInput
-from core.product.application.use_cases.create.create_product_use_case import CreateProductUseCase
-from core.product.application.use_cases.exceptions.exceptions import ProductNotFound
-from core.product.application.use_cases.find.find_product_dto import GetProductInput
-from core.product.application.use_cases.find.find_product_use_case import FindProductUseCase
-from core.product.application.use_cases.list.list_product_dto import ListProductRequest
-from core.product.application.use_cases.list.list_product_use_case import ListProductUseCase
+from src.core.product.application.use_cases.create.create_product_dto import CreateProductInput
+from src.core.product.application.use_cases.create.create_product_use_case import CreateProductUseCase
+from src.core.product.application.use_cases.exceptions.exceptions import ProductNotFound
+from src.core.product.application.use_cases.find.find_product_dto import GetProductInput
+from src.core.product.application.use_cases.find.find_product_use_case import FindProductUseCase
+from src.core.product.application.use_cases.list.list_product_dto import ListProductRequest
+from src.core.product.application.use_cases.list.list_product_use_case import ListProductUseCase
 from django_project.product.repository import DjangoORMProductRepository
 from django_project.product.serializers import CreateProductRequestSerializer, CreateProductResponseSerializer, ListProductResponseSerializer, RetrieveProductRequestSerializer, RetrieveProductResponseSerializer
 
@@ -47,6 +47,7 @@ class ProductViewSet(viewsets.ViewSet):
             result = use_case.execute(
                 GetProductInput(id=serializer.validated_data['id'])
             )
+            
         except ProductNotFound:
             return Response(status=status.HTTP_404_NOT_FOUND)
         
@@ -54,4 +55,7 @@ class ProductViewSet(viewsets.ViewSet):
         return Response(
             status=status.HTTP_200_OK,
             data=product_output.data
-            )
+        )
+
+            
+            

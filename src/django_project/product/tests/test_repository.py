@@ -1,3 +1,4 @@
+from uuid import uuid4
 import pytest
 
 from core.product.domain.product import Product
@@ -65,3 +66,33 @@ class TestFindAll:
         assert product2.stock == 5
 
 
+@pytest.mark.django_db
+class TestFind:
+    def test_find_product_by_id(self):
+        product = Product(
+            name="Product 1",
+            price=10.5,
+            description="Description of product 1",
+            stock=10
+        )
+
+        repository = DjangoORMProductRepository()
+        repository.create(product)
+
+        product_model = ProductModel.objects.first()
+        assert product_model is not None
+
+        found_product = repository.find(product_model.id)
+
+        assert found_product is not None
+        assert found_product.name == "Product 1"
+        assert found_product.price == 10.5
+        assert found_product.description == "Description of product 1"
+        assert found_product.stock == 10
+
+    def test_find_product_returns_none_if_not_found(self):
+        repository = DjangoORMProductRepository()
+
+        found_product = repository.find(uuid4())
+
+        assert found_product is None

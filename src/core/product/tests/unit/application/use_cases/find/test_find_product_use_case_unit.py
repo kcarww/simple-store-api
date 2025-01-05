@@ -35,7 +35,7 @@ class TestFindProductUseCase:
 
         response = use_case.execute(request)
 
-        mock_repository.find.assert_called_once_with(product_id)
+        mock_repository.find.assert_called_once_with(id=product_id)
         assert isinstance(response, GetProductOutput)
         assert response.id == product_id
         assert response.name == "Product A"
@@ -53,5 +53,5 @@ class TestFindProductUseCase:
         with pytest.raises(ProductNotFound) as exc_info:
             use_case.execute(request)
 
-        mock_repository.find.assert_called_once_with(product_id)
+        mock_repository.find.assert_called_once_with(id=product_id)
         assert str(exc_info.value) == f"Product with id {product_id} not found"

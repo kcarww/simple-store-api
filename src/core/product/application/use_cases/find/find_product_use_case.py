@@ -9,15 +9,16 @@ class FindProductUseCase:
     product_repository: ProductRepositoryInterface
 
     def execute(self, request: GetProductInput) -> GetProductOutput:
-        product = self.product_repository.find(request.id)
-        if not product:
+        product = self.product_repository.find(id=request.id)
+        if product is None:
             raise ProductNotFound(f"Product with id {request.id} not found")
-        
+
         return GetProductOutput(
             id=product.id,
             name=product.name,
             price=product.price,
             stock=product.stock,
+            description=product.description,
             active=product.active,
             created_at=product.created_at,
             updated_at=product.updated_at,

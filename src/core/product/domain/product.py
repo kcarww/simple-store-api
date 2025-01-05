@@ -13,6 +13,8 @@ class Product(Entity):
     created_at: datetime = field(default_factory=datetime.now)
     updated_at: datetime = field(default_factory=datetime.now)
 
+    def __repr__(self):
+        return f"Product(name={self.name}, price={self.price}, description={self.description}, stock={self.stock}, active={self.active}, created_at={self.created_at}, updated_at={self.updated_at})"
 
     def __post_init__(self):
         self.validade()

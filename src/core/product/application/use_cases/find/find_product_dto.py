@@ -13,6 +13,7 @@ class GetProductOutput:
     id: UUID
     name: str
     price: float
+    description: str
     stock: int
     active: bool
     created_at: datetime
