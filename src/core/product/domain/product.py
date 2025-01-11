@@ -51,9 +51,13 @@ class Product(Entity):
         self.active = False
         self.validade()
 
-    def update(self, name: str, price: float, description: str):
+    def update(self, name: str, price: float, description: str, active: bool):
         self.name = name
         self.price = price
         self.description = description
         self.updated_at = datetime.now()
+        if active:
+            self.activate()
+        else:
+            self.deactivate()
         self.validade()
