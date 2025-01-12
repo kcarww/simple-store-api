@@ -14,15 +14,23 @@ class DjangoORMProductRepository(ProductRepositoryInterface):
         product_orm = ProductModelMapper.to_model(product)
         product_orm.save()
 
-    def update(self, entity):
-        pass
-
+    def update(self, product: Product) -> None:
+        self.product_model.objects.filter(id=product.id).update(
+            name=product.name,
+            price=product.price,
+            stock=product.stock,
+            description=product.description,
+            active=product.active,
+            updated_at=product.updated_at
+        )
     def delete(self, entity):
         pass
 
     def find(self, id: str) -> Product | None:
         try:
-            return self.product_model.objects.get(id=id)
+            product_orm = self.product_model.objects.get(id=id)
+            return ProductModelMapper.to_entity(product_orm) 
+
         except self.product_model.DoesNotExist:
             None
 

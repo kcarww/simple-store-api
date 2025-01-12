@@ -96,3 +96,33 @@ class TestFind:
         found_product = repository.find(uuid4())
 
         assert found_product is None
+
+
+@pytest.mark.django_db
+class TestUpdate:
+    def test_update_product_in_database(self):
+        product = Product(
+            name="Product 1",
+            price=10.5,
+            description="Description of product 1",
+            stock=10
+        )
+
+        repository = DjangoORMProductRepository()
+        repository.create(product)
+
+        product_model = ProductModel.objects.first()
+        assert product_model is not None
+
+        product.name = "Product 2"
+        product.price = 20.0
+        product.description = "Description of product 2"
+        product.stock = 5
+
+        repository.update(product)
+
+        product_model.refresh_from_db()
+        assert product_model.name == "Product 2"
+        assert product_model.price == 20.0
+        assert product_model.description == "Description of product 2"
+        assert product_model.stock == 5

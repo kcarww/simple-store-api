@@ -9,7 +9,8 @@ class UpdateProductUseCase:
     product_repository: ProductRepositoryInterface
 
     def execute(self, request: UpdateProductInput) -> UpdateProductOutput:
-        product = self.product_repository.find_by_id(request.id)
+        product = self.product_repository.find(request.id)
+        print(type(product), '<<<<<<<<<<<<<<<<')
 
         if product is None:
             raise ProductNotFound(f"Product with id {request.id} not found")
@@ -20,6 +21,7 @@ class UpdateProductUseCase:
 
         if not request.active:
             product.deactivate()
+            
 
         product.update(request.name, request.price, request.description, request.stock)
 

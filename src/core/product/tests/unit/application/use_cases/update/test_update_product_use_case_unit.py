@@ -38,7 +38,7 @@ class TestUpdateProductUseCase:
             existing_product.stock = stock
 
         existing_product.update.side_effect = update_mock
-        mock_repository.find_by_id.return_value = existing_product
+        mock_repository.find.return_value = existing_product
 
         input_data = UpdateProductInput(
             id=product_id,
@@ -51,7 +51,7 @@ class TestUpdateProductUseCase:
 
         result = use_case.execute(input_data)
 
-        mock_repository.find_by_id.assert_called_once_with(product_id)
+        mock_repository.find.assert_called_once_with(product_id)
         existing_product.update.assert_called_once_with(
             input_data.name,
             input_data.price,
@@ -66,7 +66,7 @@ class TestUpdateProductUseCase:
 
     def test_execute_raises_exception_when_product_not_found(self, use_case, mock_repository):
         product_id = uuid4()
-        mock_repository.find_by_id.return_value = None
+        mock_repository.find.return_value = None
 
         input_data = UpdateProductInput(
             id=product_id,
@@ -83,7 +83,7 @@ class TestUpdateProductUseCase:
        
         assert f"Product with id {product_id} not found" in str(exc_info.value)
 
-        mock_repository.find_by_id.assert_called_once_with(product_id)
+        mock_repository.find.assert_called_once_with(product_id)
 
         mock_repository.update.assert_not_called()
     def test_execute_activates_product(self, use_case, mock_repository):
@@ -92,7 +92,7 @@ class TestUpdateProductUseCase:
         existing_product.id = product_id
         existing_product.active = False
 
-        mock_repository.find_by_id.return_value = existing_product
+        mock_repository.find.return_value = existing_product
 
         input_data = UpdateProductInput(
             id=product_id,
@@ -114,7 +114,7 @@ class TestUpdateProductUseCase:
         existing_product.id = product_id
         existing_product.active = True
 
-        mock_repository.find_by_id.return_value = existing_product
+        mock_repository.find.return_value = existing_product
 
         input_data = UpdateProductInput(
             id=product_id,
@@ -140,7 +140,7 @@ class TestUpdateProductUseCase:
             existing_product.updated_at = datetime.now()
 
         existing_product.update.side_effect = update_mock
-        mock_repository.find_by_id.return_value = existing_product
+        mock_repository.find.return_value = existing_product
 
         input_data = UpdateProductInput(
             id=product_id,
