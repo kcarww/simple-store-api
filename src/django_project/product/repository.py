@@ -22,8 +22,7 @@ class DjangoORMProductRepository(ProductRepositoryInterface):
 
     def find(self, id: str) -> Product | None:
         try:
-            product_orm = self.product_model.objects.get(id=id)
-            return product_orm 
+            return self.product_model.objects.get(id=id)
         except self.product_model.DoesNotExist:
             None
 
