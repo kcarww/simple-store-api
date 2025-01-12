@@ -91,10 +91,12 @@ class TestProduct:
         product.update(
             name="new name",
             price=20.0,
-            description="new description"
+            description="new description",
+            stock=3
         )
 
         assert product.name == "new name"
         assert product.price == 20.0
         assert product.description == "new description"
+        assert product.stock == 3
         assert product.updated_at
