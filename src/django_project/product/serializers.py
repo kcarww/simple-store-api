@@ -32,3 +32,11 @@ class RetrieveProductResponseSerializer(serializers.Serializer):
 
 class RetrieveProductRequestSerializer(serializers.Serializer):
     id = serializers.UUIDField()
+
+class UpdateProductResponseSerializer(serializers.Serializer):
+    id = serializers.UUIDField()
+    name = serializers.CharField()
+    price = serializers.DecimalField(max_digits=10, decimal_places=2)
+    stock = serializers.IntegerField()
+    active = serializers.BooleanField()
+    description = serializers.CharField()

@@ -17,9 +17,9 @@ class Product(Entity):
         return f"Product(name={self.name}, price={self.price}, description={self.description}, stock={self.stock}, active={self.active}, created_at={self.created_at}, updated_at={self.updated_at})"
 
     def __post_init__(self):
-        self.validade()
+        self.validate()
 
-    def validade(self):
+    def validate(self):
         self.validate_name()
         self.validate_price()
         self.validate_description()
@@ -45,11 +45,11 @@ class Product(Entity):
 
     def activate(self):
         self.active = True
-        self.validade()
+        self.validate()
 
     def deactivate(self):
         self.active = False
-        self.validade()
+        self.validate()
 
     def update(self, name: str, price: float, description: str, stock: int):
         self.name = name
@@ -57,4 +57,4 @@ class Product(Entity):
         self.description = description
         self.stock = stock
         self.updated_at = datetime.now()
-        self.validade()
+        self.validate()

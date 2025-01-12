@@ -4,6 +4,8 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import status
 
+from src.core.product.application.use_cases.update.update_product_dto import UpdateProductInput
+from src.core.product.application.use_cases.update.update_product_use_case import UpdateProductUseCase
 from src.core.product.application.use_cases.create.create_product_dto import CreateProductInput
 from src.core.product.application.use_cases.create.create_product_use_case import CreateProductUseCase
 from src.core.product.application.use_cases.exceptions.exceptions import ProductNotFound
@@ -12,7 +14,7 @@ from src.core.product.application.use_cases.find.find_product_use_case import Fi
 from src.core.product.application.use_cases.list.list_product_dto import ListProductRequest
 from src.core.product.application.use_cases.list.list_product_use_case import ListProductUseCase
 from django_project.product.repository import DjangoORMProductRepository
-from django_project.product.serializers import CreateProductRequestSerializer, CreateProductResponseSerializer, ListProductResponseSerializer, RetrieveProductRequestSerializer, RetrieveProductResponseSerializer
+from django_project.product.serializers import CreateProductRequestSerializer, CreateProductResponseSerializer, ListProductResponseSerializer, RetrieveProductRequestSerializer, RetrieveProductResponseSerializer, UpdateProductResponseSerializer
 
 
 class ProductViewSet(viewsets.ViewSet):
@@ -55,6 +57,25 @@ class ProductViewSet(viewsets.ViewSet):
         return Response(
             status=status.HTTP_200_OK,
             data=product_output.data
+        )
+    
+    def update(self, request: Request, pk: str = None) -> Response:
+        serializer = UpdateProductResponseSerializer(data={
+            **request.data,
+            "id": pk
+        })
+        serializer.is_valid(raise_exception=True)
+
+        product_input = UpdateProductInput(**serializer.validated_data)
+        use_case = UpdateProductUseCase(product_repository=DjangoORMProductRepository())
+        try:
+            product_output = use_case.execute(product_input)
+        except ProductNotFound:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        
+        return Response(
+            status=status.HTTP_202_ACCEPTED,
+            data=CreateProductResponseSerializer(instance=product_output).data
         )
 
             

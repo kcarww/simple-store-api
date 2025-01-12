@@ -164,3 +164,86 @@ class TestRetrieveProductAPI:
         response = APIClient().get(url)
 
         assert response.status_code == status.HTTP_404_NOT_FOUND
+
+
+@pytest.mark.django_db
+class TestUpdateProductAPI:
+    def test_when_product_exists_and_payload_is_valid_then_return_200_with_updated_product(self):
+        repository = DjangoORMProductRepository()
+
+        product = Product(
+            name="Product 1",
+            description="Description of product 1",
+            stock=10,
+            active=True,
+            price=10.0
+        )
+        repository.create(product)
+
+        url = f"/api/products/{product.id}/"
+
+        response = APIClient().put(
+            url,
+            data={
+                "name": "Product 1 Updated",
+                "description": "Description of product 1 Updated",
+                "stock": 20,
+                "active": False,
+                "price": 20.0
+            }, format="json"
+        )
+
+        assert response.status_code == status.HTTP_202_ACCEPTED
+
+        response_data = response.json()
+        assert response_data["id"] == str(product.id)
+        assert response_data["name"] == "Product 1 Updated"
+        assert response_data["description"] == "Description of product 1 Updated"
+        assert response_data["stock"] == 20
+        assert response_data["active"] is False
+        assert response_data["price"] == "20.00"
+        assert "created_at" in response_data
+        assert "updated_at" in response_data
+
+    def test_when_product_does_not_exist_then_return_404(self):
+        url = f"/api/products/{uuid4()}/"
+
+        response = APIClient().put(
+            url,
+            data={
+                "name": "Product 1 Updated",
+                "description": "Description of product 1 Updated",
+                "stock": 20,
+                "active": False,
+                "price": 20.0
+            }, format="json"
+        )
+
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+
+    def test_when_payload_is_invalid_then_return_400(self):
+        repository = DjangoORMProductRepository()
+
+        product = Product(
+            name="Product 1",
+            description="Description of product 1",
+            stock=10,
+            active=True,
+            price=10.0
+        )
+        repository.create(product)
+
+        url = f"/api/products/{product.id}/"
+
+        response = APIClient().put(
+            url,
+            data={
+                "name": "",
+                "description": "Description of product 1 Updated",
+                "stock": 20,
+                "active": False,
+                "price": 20.0
+            }, format="json"
+        )
+
+        assert response

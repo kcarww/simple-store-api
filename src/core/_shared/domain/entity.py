@@ -14,5 +14,5 @@ class Entity(ABC):
         return other.id == self.id
     
     @abstractmethod
-    def validade(self):
+    def validate(self):
         pass
