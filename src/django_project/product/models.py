@@ -12,6 +12,4 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "<ProductModel> id: {}, name: {}, price: {}, stock: {}, active: {}, description: {}, created_at: {}, updated_at: {}".format(
-            self.id, self.name, self.price, self.stock, self.active, self.description, self.created_at, self.updated_at
-        )
+        return f"<ProductModel> id: {self.id}, name: {self.name}, price: {self.price}, stock: {self.stock}, active: {self.active}, description: {self.description}, created_at: {self.created_at}, updated_at: {self.updated_at}"
