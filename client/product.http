@@ -20,3 +20,18 @@ GET http://127.0.0.1:8000/api/products/
 
 # @name get_product
 GET http://127.0.0.1:8000/api/products/512bb66a-51c2-4487-9b49-a3dd19ee8341/
+
+
+###
+
+# @name update_product
+PUT http://127.0.0.1:8000/api/products/512bb66a-51c2-4487-9b49-a3dd19ee8348/
+Content-Type: application/json
+
+{
+    "name": "editado Product editado",
+    "price": 150,
+    "stock": 2,
+    "description": "editado of product 1",
+    "active": true
+}
