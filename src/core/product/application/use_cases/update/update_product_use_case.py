@@ -10,7 +10,6 @@ class UpdateProductUseCase:
 
     def execute(self, request: UpdateProductInput) -> UpdateProductOutput:
         product = self.product_repository.find(request.id)
-        print(type(product), '<<<<<<<<<<<<<<<<')
 
         if product is None:
             raise ProductNotFound(f"Product with id {request.id} not found")
